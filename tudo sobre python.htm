@@ -1,0 +1,1102 @@
+
+<!DOCTYPE html>
+<html lang="pt-br-us">
+<head><meta charset="iso-8859-1" /><title>
+	Introdução ao Python - Parte 1
+</title><meta id="PageDescription" name="Description" content="Neste artigo, iremos aprender como utilizar os mais diversos tipos de objetos que o Python dispõe, como strings, listas, dicionários e outros." /><meta id="PageKeywords" name="Keywords" content="Introdução ao Python - Parte 1" /><meta name="language" content="pt-br" /><meta id="viewport" name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=3.0,initial-scale=1.0" /><link href="https://plus.google.com/100240100485097203227" rel="publisher" /><link id="PageCanonical" rel="canonical" href="http://www.linhadecodigo.com.br/artigo/556/introducao-ao-python-parte-1.aspx" />
+	<style>
+		*:before, *:after {
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+		}
+	</style>
+    <link href="http://www.linhadecodigo.com.br/img/favicon.ico" rel="shortcut icon" type="image/x-icon" /><link href="http://www.linhadecodigo.com.br/css/2015/master.css?d=2.3" rel="stylesheet" type="text/css" /><link href="http://www.linhadecodigo.com.br/css/2015/content.css?d=2.6" rel="stylesheet" type="text/css" /><link href="http://www.linhadecodigo.com.br/css/2015/grid.css?d=2" rel="stylesheet" type="text/css" /><link href="http://www.linhadecodigo.com.br/css/2015/grid-responsive.css?d=2" rel="stylesheet" type="text/css" /><link href="http://www.linhadecodigo.com.br/css/2015/lc-header-footer.css?d=3.0" rel="stylesheet" type="text/css" /><link href="http://www.linhadecodigo.com.br/css/2015/form_style.css?d=1.1" rel="stylesheet" type="text/css" /><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+    <script src="http://www.linhadecodigo.com.br/Scripts/jquery.infieldlabel.min.js" type="text/javascript"></script>
+    <script src="http://www.linhadecodigo.com.br/Scripts/menu.desktop.js?d=1.1" type="text/javascript"></script>
+    <script src="http://www.linhadecodigo.com.br/Scripts/funcoes_lc.js?d=1" type="text/javascript"></script>
+    <script type="text/javascript">
+        window.___gcfg = { lang: 'pt-BR' };
+        (function() {
+            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+            po.src = 'https://apis.google.com/js/plusone.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+        })();
+        
+        function loadpromocao() {
+            //alert("teste");
+            $.ajax({
+                type: "GET",
+                url: "/promocao/loadpromo.asp",
+                dataType: "text",
+                success: function(responseText) {
+                    //alert(responseText);
+                    $("#promoview").html(responseText);
+                    setTimeout(function() { loadpromocao() }, 1000);
+                },
+                error: function() {
+                    //alert("Ocorreu um erro, você será redirecionado para a página da promoção");
+                    setTimeout(function() { loadpromocao() }, 1000);
+                }
+            });
+            
+        }
+        function hidepromo(a) {
+            if (a == 0) {
+                document.getElementById("bgplusone").style.display = "none";
+                document.getElementById("boxplusoneall").style.display = "none";
+            } else {
+                $("#promocaobtn").show();
+                document.getElementById("bgplusone").style.display = "block";
+                document.getElementById("boxplusoneall").style.display = "block";
+                document.getElementById("promocaotext").focus();
+            }
+        }
+        $(document).ready(function() {
+            //if (plusone != null && plusone != "") { showhidePlusOne(0); }
+            $(".labelInfield").inFieldLabels();
+
+            $('#top10-widget h3').click(function() {
+                var id = $(this).attr('id');
+                if (id == 'title-articles-widget') {
+                    $('#title-author-widget').addClass('inactive-tab');
+                    $('#title-articles-widget').removeClass('inactive-tab');
+                    $('#author-list').fadeOut(function() {
+                        $('#articles-list').fadeIn();
+                    });
+
+                } else {
+                    $('#title-articles-widget').addClass('inactive-tab');
+                    $('#title-author-widget').removeClass('inactive-tab');
+                    $('#articles-list').fadeOut(function() {
+                        $('#author-list').fadeIn();
+                    });
+                };
+
+            });
+        });
+    </script>
+    <!-- BEGIN Tynt Script -->
+        <script type="text/javascript">
+        if(document.location.protocol=='http:'){
+         var Tynt=Tynt||[];Tynt.push('d6atTCQpKr4BnYacwqm_6l');Tynt.i={"ap":"Read more:"};
+         (function(){var s=document.createElement('script');s.async="async";s.type="text/javascript";s.src='http://tcr.tynt.com/ti.js';var h=document.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h);})();
+        }
+        </script>
+    <!-- END Tynt Script -->
+    
+<meta property="og:image" content="http://www.linhadecodigo.com.br/img/logoLc.png" />
+<link href="http://www.linhadecodigo.com.br/syntaxhighlighter_3.0.83/styles/shCore.css" rel="stylesheet" type="text/css" />
+<link href="http://www.linhadecodigo.com.br/syntaxhighlighter_3.0.83/styles/shThemeDefault.css" rel="stylesheet" type="text/css" />
+<link href="http://www.linhadecodigo.com.br/css/uniform.default.min.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://www.linhadecodigo.com.br/scripts/jquery.uniform.min.js"></script>
+<script type="text/javascript" src="http://www.linhadecodigo.com.br/scripts/querystring.js"></script>
+<script type="text/javascript" src="http://www.linhadecodigo.com.br/scripts/jquery.cookie.js"></script>
+<script type="text/javascript" src="http://www.linhadecodigo.com.br/syntaxhighlighter_3.0.83/scripts/shCore.js"></script>
+<script type="text/javascript" src="http://www.linhadecodigo.com.br/syntaxhighlighter_3.0.83/scripts/shBrushJScript.js"></script>
+<script type="text/javascript">var switchTo5x = true;</script><script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script><script type="text/javascript">stLight.options({ publisher: '7fba8974-a42c-4d1b-96a9-4249a82ce8c0', onhover: false });</script>
+<script type="text/javascript">SyntaxHighlighter.all();</script>	
+<style type="text/css">
+.article img { max-width: 100%; }
+.main-content h3 a.rss-icon { color: #EC7423; }
+.main-content h3 a.rss-icon:hover,
+.main-content h3 a.rss-icon:focus { text-decoration: none; color: #302f31; }
+</style>
+<script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-15063568-1']);
+    _gaq.push(['_setDomainName', '.linhadecodigo.com.br']);
+    _gaq.push(['_trackPageview']);
+	_gaq.push(['_trackPageLoadTime']);
+
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+</script></head>
+<body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.3&appId=557561654385120";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="dm-shadow"></div>
+<div class="dm-shell">
+
+<script>
+$(document).ready(function() {
+	'use strict';
+	
+	$(document).on("submit", "#buscaArtigos" ,function(e){
+		if ($('#Pesquisar').val() == "") {
+			e.preventDefault();
+			e.stopPropagation();
+			window.location = "http://www.linhadecodigo.com.br/todosartigos.aspx";
+		}
+	});
+});
+</script>	
+	<header>
+		<span class="opacity"></span>
+		<nav class="lateral">
+			<ul>
+				<li><strong><a href="http://www.linhadecodigo.com.br"><span class="font-dev">Bem</span><span class="font-media">vindo</span><span class="icon fa fa-home"></span></a></strong></li>
+				<li><a href="#" class="back" data-main="true">Voltar</a></li>
+				
+				<li><a href="#" rel="nofollow"><span class="icon2 fa fa-desktop"></span>Canais<span></span></a>
+					<ul>
+						<li><h5>Canais<span class="icon fa fa-desktop"></span></h5></li>
+						<li><a href="#" class="back">Voltar</a></li>
+						<li><a href="http://www.linhadecodigo.com.br/php.aspx">PHP</a></li>
+						<li><a href="http://www.linhadecodigo.com.br/cms.aspx">CMS</a></li>
+						<li><a href="http://www.linhadecodigo.com.br/python.aspx">Python</a></li>
+						<li><a href="http://www.linhadecodigo.com.br/java.aspx">Java</a></li>
+						<li><a href="http://www.linhadecodigo.com.br/aspnet.aspx">.net</a></li>
+						<li><a href="http://www.linhadecodigo.com.br/html.aspx">HTML</a></li>
+						<li><a href="http://www.linhadecodigo.com.br/css.aspx">CSS</a></li>
+						<li><a href="http://www.linhadecodigo.com.br/javascript.aspx">Javascript</a></li>
+						<li><a href="http://www.linhadecodigo.com.br/bancodedados.aspx">Banco de dados</a></li>
+						<li><a href="http://www.linhadecodigo.com.br/todosartigos.aspx">Todos</a></li>
+					</ul>
+				</li>
+				<li><a href="mailto:colabore@linhadecodigo.com.br" rel="nofollow"><span class="icon2 fa fa-headphones"></span>Fale Conosco</a></li>
+				<li><a href="http://www.linhadecodigo.com.br/feed/" rel="nofollow"><span class="icon2 fa fa-rss"></span>RSS</a></li>
+				
+			</ul>
+		</nav>
+		<nav class="dm-bgnav-out">
+			<div class="container-fluid dm-bgnav">
+				<div class="container">
+					<div class="devmenu">
+						<i><a href="#" class="menu"></a></i>
+						<a class="logo-mob" href="http://www.linhadecodigo.com.br/">
+						<span class="font-dev">Linha</span><span class="font-media"> de Código</span>
+						</a>
+						<span id="headermenudesktop"></span>
+							<span id="WUC_Topo_Novo_lblTeste" class="aspNetDisabled"></span>
+							<span id="WUC_Topo_Novo_boxLogin" class="login-box"><div class="login-btn"><div class="popover1">Login</div><div class="pai"><div class="login-pop deslogado"><div class="login-form"><div class="seta"></div><form name="f1" class="form-inline" method="POST"><input type="text" name="userlogin" class="input-medium pull-left" placeholder="Usuário" /><input type="password" name="usersenha" class="input-medium pull-right" placeholder="Senha" /><input type="hidden" name="login" value="Login" /><br /><button type="submit">OK</button></form></div></div></div></div></span>
+					</div>
+				</div>
+			</div>
+		</nav><!-- FIM MENU DESKTOP -->
+		<div class="container-fluid dm-busca"><!-- BLOCO TOPO -->
+			<div class="container">
+				<div class="row-fluid">
+					<a href="http://www.linhadecodigo.com.br/"><img src="http://www.linhadecodigo.com.br/img/logolc.png" alt="Linha de Código" title="Linha de Código"></a>
+					<!-- BUSCA EM TELA DESKTOP E TABLET -->
+					<nav id="busca">
+						<form id="buscaArtigos" action="http://www.linhadecodigo.com.br/busca.aspx">
+						<input type="text" id="Pesquisar" name="w" placeholder="Pesquisar"/>
+						<button type="submit"></button>
+						</form>
+					</nav>
+				</div>
+			</div>
+		</div><!-- FIM BLOCO TOPO -->
+	</header><!-- BLOCO DESTAQUES -->
+	<section class="container-fluid">
+		<div class="container">
+			<div class="row-fluid">
+				
+<div id="conteudo" class="main-content">
+    <span id="ContentPlaceHolder1_lblNomeCanal" class="title-page"><h3>Desenvolvimento<span> - <a href="/python.aspx" style="font-size: 20px;">Python</a></span><a class="rss-icon fr" href="http://www.linhadecodigo.com.br/rssartigosautor.aspx?autor=136" target="_blank"><i class="fa fa-rss-square fa-lg" title="Feed de artigos deste autor" alt="Feed de artigos deste autor"></i></a></h3></span>
+    <div style="word-wrap:break-word;">
+    <span id="ContentPlaceHolder1_lblTitulo"><h1>Introdução ao Python - Parte 1<br /><p>Neste artigo, iremos aprender como utilizar os mais diversos tipos de objetos que o Python dispõe, como strings, listas, dicionários e outros.</p><span>por <a href="http://www.linhadecodigo.com.br/colaborador.aspx?id=136">Fábio Rizzo Matos</a></span></h1></span>
+    <span id="ContentPlaceHolder1_lblSocialShareArticle"><div id="social-share-article"><span  class="st_facebook_hcount" displayText="Facebook" st_image="http://www.linhadecodigo.com.br/img/logoLc.png"></span><span  class="st_twitter_hcount" displayText="Tweet" st_image="http://www.linhadecodigo.com.br/img/logoLc.png"></span><span  class="st_linkedin_hcount" displayText="LinkedIn" st_image="http://www.linhadecodigo.com.br/img/logoLc.png"></span><span  class="st_email_hcount" displayText="Email" st_image="http://www.linhadecodigo.com.br/img/logoLc.png"></span><span  class="st_plusone_hcount" st_image="http://www.linhadecodigo.com.br/img/logoLc.png" style="margin-left:5px;" ></span><span  class="st_fblike_hcount" st_image="http://www.linhadecodigo.com.br/img/logoLc.png" style="margin-left:-5px;" ></span></div><br /><br /></span>
+    <span id="ContentPlaceHolder1_lblTexto" class="artigo"><div class="article"><b>1 - Tipos de Objetos</b>
+<p>
+Neste artigo, iremos aprender como utilizar os mais diversos tipos de objetos que o Python dispõe, como strings, listas, dicionários e outros.
+<p>
+<b>1.1 - Uso de Strings</b>
+<p>
+No Python, strings são seqüencias imutáveis de caracteres. Eles são imutáveis devido ao fato que para se modificar uma String seja necessário a criação de outra String.
+<pre>
+>>> minhastring="Fabio Rizzo"
+>>> minhastring
+"Fabio Rizzo"
+</pre>
+<p>
+Podemos Declarar uma String de várias formas:
+<pre>
+String="Fabio Rizzo"
+String="Fabio Rizzo"
+>>> String="""Fabio
+Rizzo
+em
+várias
+linhas
+"""
+>>> print String
+Fabio
+Rizzo
+em
+várias
+linhas
+</pre>
+<p>
+Em Python, uma String é uma seqüencia de letras, endereçada de forma que você possa ter acesso a qualquer valor dessa seqüencia. Os endereçamentos começam a ser contados do zero. 
+<p>
+Utilizamos essa sintaxe para ter acesso a um valor em específico dentro da String:
+<pre>
+String[IS:FS:IS]
+</pre>
+onde IS = Inicio do endereço, FS = Fim do endereço e IS = Incremento.
+<p>
+Vamos mapear os endereços da minhastring, que tem o valor Fabio Rizzo:
+<p>
+<img src="/artigos/img_artigos/fabio_rizzo/into_python_parte1_1.jpg" width="570" height="83" alt="" border="0">
+<p>
+Agora se quisermos ver o endereço dois da minhastring que tem o valor b fazemos o seguinte comando:
+<pre>
+>>> minhastring[2]
+"b"
+</pre>
+<p>
+E se quisermos somente o nome Fabio? Devemos fazer assim:
+<pre>
+>>> minhastring[:5]
+"Fabio"
+</pre>
+<p>
+Nesse caso nos falamos pro Python que nós queremos todos os valores até o endereço 5. Não podemos esquecer o detalhe que a o interpretador Python entende o último endereço -1. Isso significa que se quisermos todos os valores até o endereço 6 devemos fazer minhastring[:7], porque o interpretador irá pegar todos parando quando chegar no endereço 7.
+<p>
+Para nós pegarmos somente o sobrenome Rizzo devemos fazer:
+<pre>
+>>> minhastring[6:]
+"Rizzo"
+</pre>
+<p>
+ou
+<pre>
+>>> minhastring[6:11]
+"Rizzo"
+</pre>
+<p>
+Ambos funcionam corretamente, somente cabendo a você, a melhor forma de utiliza-los. E se quisermos pegar todos os valores utilizando incremento de 2? Fazemos assim:
+<pre>
+>>> minhastring[::2]
+"FboRzo"
+</pre>
+<p>
+Poderíamos pegar do 6 valor para frente incrementando em 2 também. Veja só:
+<pre>
+>>> minhastring[6::2]
+"Rzo"
+</pre>
+<p>
+Quando não definimos qual é o ponto final na seqüencia, o interpretador Python entende que você quer toda a seqüencia. Podemos também inverter uma seqüencia:
+<pre>
+>>> minhastring[::-1]
+"ozziR oibaF"
+</pre>
+<p>
+Utilizando o operador negativo, nós invertemos a ordem de contagem dos endereços, e o Python passa a contar ao contrário.
+<p>
+E pegando apenas o nome Fabio ao contrário, fazemos o seguinte:
+<pre>
+>>> minhastring[4::-1]
+"oibaF"
+</pre>
+<p>
+Podemos concatenar uma String em outra muito simplesmente, veja só:
+<pre>
+>>> sobrenome="Matos"
+>>> nomecompleto=minhastring+" "+sobrenome
+>>> print nomecompleto
+Fabio Rizzo Matos
+</pre>
+<p>
+Vamos Detalhar essa parte do código:
+<pre>
+nomecompleto=minhastring+" "+sobrenome
+</pre>
+<p>
+Nesse caso nós pegamos a contante nomecompleto e colocamos dentro dela os valores de minhastring, um espaço em branco e os valores de sobrenome.
+<p>
+Lembrando que não podemos concatenar valores de String com inteiros, ou strings com qualquer outro tipo de dados sem ser String. Veja abaixo:
+<pre>
+>>> idade=int(22)
+>>> teste=nomecompleto+" "+idade
+
+Traceback (most recent call last):
+File "&lt;pyshell#52&gt;", line 1, in -toplevel-
+teste=nomecompleto+" "+idade
+TypeError: cannot concatenate "str" and "int" objects
+</pre>
+<p>
+Declarei idade como inteiro e tentei concatenar o seu valor com nomecompleto. O Python retornou uma mensagem de erro, explicando que não é permitido concatenar str(String) com int(inteiro). Perceba que forçamos a idade a ser int como acima. idade=int(22). 
+Podemos utilizar alguns métodos sobre strings como os abaixo:
+<p>
+<TABLE class=MsoNormalTable >
+    <TD     ><STRONG><FONT        face=Verdana><FONT size=2>Método</FONT></FONT></STRONG></P></TD>
+    <TD     ><STRONG><FONT        face=Verdana><FONT size=2>Para que 
+      serve</FONT></FONT></STRONG></P></TD>
+    <TD     ><STRONG><FONT        face=Verdana><FONT    size=2>Exemplo</FONT></FONT></STRONG></P></TD></TR>
+  
+  <TR>
+    <TD     ><FONT        face=Verdana><FONT size=2>x.capitalize()</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>Deixa a primeira inicial 
+      maiúscula.</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x="fabio"</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x.capitalize()</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>"Fabio"</FONT></FONT></P></TD></TR>
+  <TR>
+    <TD     ><FONT        face=Verdana><FONT size=2>x.count()</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>Procura quantas ocorrências da busca existem na 
+      String.</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x="fabio"</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x.count("fa")</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>1</FONT></FONT></P></TD></TR>
+  <TR>
+    <TD     ><FONT        face=Verdana><FONT size=2>x.startswith()</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>Verifica se a String inicia com determinado 
+      caractere, retornando verdadeiro ou falso.</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x="fabio"</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x.startswith("fa")</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>True</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x.startswith("ri")</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>False</FONT></FONT></P></TD></TR>
+  <TR>
+    <TD     ><FONT        face=Verdana><FONT size=2>x.endswith()</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>Verifica se a String termina com determinado 
+      caractere, retornando verdadeiro ou falso.</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x="fabio"</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x.endswith("io")</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>True</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x.endswith("fa")</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>False</FONT></FONT></P></TD></TR>
+  <TR>
+    <TD     ><FONT        face=Verdana><FONT size=2>x.isalnum()</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>Verifica se a String tem conteúdo 
+      alfa-numérico</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x="22fabio"</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x.isalnum()</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>True</FONT></FONT></P></TD></TR>
+  <TR>
+    <TD     ><FONT        face=Verdana><FONT size=2>x.isalpha()</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>Verifica se a String tem o conteúdo apenas 
+      alfabético</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x="22fabio"</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x.isalpha()</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>False</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x="fabio"</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x.isalpha()</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>True</FONT></FONT></P></TD></TR>
+  <TR>
+    <TD     ><FONT        face=Verdana><FONT size=2>x.islower()</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>Verifica se a String tem o conteúdo 
+      minúsculo.</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x="fabio"</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x.islower()</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>True</FONT></FONT></P></TD></TR>
+  <TR>
+    <TD     ><FONT        face=Verdana><FONT size=2>x.isupper()</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>Verifica se a String tem o conteúdo em 
+      maiúsculo</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x="fabio"</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x.isupper()</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>False</FONT></FONT></P></TD></TR>
+  <TR>
+    <TD     ><FONT        face=Verdana><FONT size=2>x.lower()</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>Converte o conteúdo da String para 
+      minúsculo.</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x="FABIO"</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x.lower()</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>"fabio"</FONT></FONT></P></TD></TR>
+  <TR>
+    <TD     ><FONT        face=Verdana><FONT size=2>x.upper()</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>Converte o conteúdo da String para 
+      maiúsculo.</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x="fabio"</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x.upper()</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>"FABIO"</FONT></FONT></P></TD></TR>
+  <TR>
+    <TD     ><FONT        face=Verdana><FONT size=2>x.swapcase()</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>Inverte a situação da 
+      String.</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x="Fabio"</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x.swapcase()</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>"fABIO"</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x="fABIO"</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x.swapcase()</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>"Fabio"</FONT></FONT></P></TD></TR>
+  <TR>
+    <TD     ><FONT        face=Verdana><FONT size=2>x.title()</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>Converte para maiúscula todos os primeiros 
+      caracteres da String.</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; x="fabio rizzo 
+      matos"</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x.title()</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>"Fabio Rizzo 
+    Matos"</FONT></FONT></P></TD></TR>
+  <TR>
+    <TD     ><FONT        face=Verdana><FONT size=2>“ “.join()</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>Une duas ou mais strings utilizando um 
+      delimitador.</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      ";".join(("fabio","rizzo"))</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>"fabio;rizzo"</FONT></FONT></P></TD></TR>
+  <TR>
+    <TD     ><FONT        face=Verdana><FONT size=2>x.split()</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>Corta a String em uma lista, utilizando o espaço 
+      como delimitador.</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; x="Fabio Rizzo 
+      Matos"</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x.split()</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>["Fabio", "Rizzo", 
+      "Matos"]</FONT></FONT></P></TD></TR>
+  <TR>
+    <TD     ><FONT        face=Verdana><FONT size=2>x.split(“;”)</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>Corta a String em uma lista, utilizando o 
+      ponto-e-vírgula como delimitador.</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x="Fabio;Rizzo;Matos"</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x.split(";")</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>["Fabio", "Rizzo", 
+      "Matos"]</FONT></FONT></P></TD></TR>
+  <TR>
+    <TD     ><FONT        face=Verdana><FONT size=2>x.ljust(tamanho)</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>Ajusta a String para a esquerda utilizando um 
+      tamanho determinado.</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x="Fabio"</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x.ljust(10)</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>"Fabio "</FONT></FONT></P></TD></TR>
+  <TR>
+    <TD     ><FONT        face=Verdana><FONT size=2>x.rjust(tamanho)</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>Ajusta a String para a direita utilizando um 
+      tamanho determinado.</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x="Fabio"</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x.rjust(10)</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>" Fabio"</FONT></FONT></P></TD></TR>
+  <TR>
+    <TD     ><FONT        face=Verdana><FONT  size=2>x.center(tamanho)</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>Ajusta a String para o centro utilizando um 
+      tamanho determinado.</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>x="Fabio"</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x.center(10)</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>" Fabio "</FONT></FONT></P></TD></TR>
+  <TR>
+    <TD     ><FONT        face=Verdana><FONT size=2>x.lstrip()</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>Remove os espaços em branco do lado esquerdo de 
+      uma String.</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; x=" Fabio 
+      "</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x.lstrip()</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>"Fabio "</FONT></FONT></P></TD></TR>
+  <TR>
+    <TD     ><FONT        face=Verdana><FONT size=2>x.rstrip()</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>Remove os espaços em branco do lado direito de 
+      uma String.</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; x=" Fabio 
+      "</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x.rstrip()</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>" Fabio"</FONT></FONT></P></TD></TR>
+  <TR>
+    <TD     ><FONT        face=Verdana><FONT size=2>x.strip()</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>Remove todos os espaços em branco de uma 
+      String</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; x=" Fabio 
+      "</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x.strip()</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>"Fabio"</FONT></FONT></P></TD></TR>
+  <TR>
+    <TD     ><FONT        face=Verdana><FONT  size=2>x.find(parâmetro)</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>Procura por uma ocorrência de determinado 
+      caractere em um String, e retorna o seu endereço dentro da String. 
+      Retornando -1 indica que não existe tal caractere na 
+      String.</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; x="Fabio 
+      Rizzo"</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x.find("Rizzo")</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>6</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x.find("joao")</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>-1</FONT></FONT></P></TD></TR>
+  <TR >
+    <TD     ><FONT        face=Verdana><FONT        size=2>x.replace(busca,substitui)</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>Procura por um caractere e substitui por 
+      outro.</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      x.replace("Mattos","Matos")</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>"Fabio Rizzo 
+    Matos"</FONT></FONT></P></TD></TR></TABLE>
+<b>1.2 - Uso de Listas</b>
+<p>
+Lista é uma seqüencia de valores que utilizamos no Python. Listas são dinâmicas, o que possibilita adicionarmos ou removermos valores uma vez que a lista for criada.
+<p>
+Uma lista possibilita conter valores inteiros(int), strings, float ou qualquer outro tipo de objeto. Podemos utilizar o mesmo método de mapeamento de endereços que utilizamos nas strings.
+<p>
+<img src="/artigos/img_artigos/fabio_rizzo/into_python_parte1_2.jpg" width="570" height="64" alt="" border="0">
+<pre>
+>>> lista = [1,2,3]
+>>> lista
+[1, 2, 3]
+>>> lista[0]
+1
+>>> lista[-1]
+3
+</pre>
+<p>
+Onde o endereço 0 (lista[0])da lista é 1. Podemos também pegar vários valores de uma lista e concatena-los. Ex:
+<pre>
+>>> lista[0]+lista[1]
+3 
+</pre>
+<p>
+Nesse caso, somamos o valor do endereço 0 de lista para o valor do endereço 1 de lista. Se adicionarmos um valor diretamente a lista, retornaremos um erro, pois não é possível adicionar valores diretamente a lista, sendo necessário utilizarmos outro método.
+<pre>
+>>> lista+22
+Traceback (most recent call last):
+File "&lt;pyshell#134&gt;", line 1, in -toplevel-
+lista+22
+TypeError: can only concatenate list (not "int") to list
+</pre>
+<p>
+Porém se fizermos lista+[22] adicionaremos o valor a lista.
+<pre>
+>>> lista = lista+[22]
+[1, 2, 3, 22]
+</pre>
+<p>
+Vamos ver os valores da lista:
+<pre>
+>>> lista
+[1, 2, 3, 22]
+</pre>
+<p>
+Também podemos utilizar o endereçamento da lista ou o método append. Por exemplo, modificar o endereço 0 que contém o valor 1 para fábio:
+<pre>
+>>> lista[0] = "Fabio"
+>>> lista
+["Fabio", 2, 3]
+</pre>
+<p>
+Se tentarmos adicionar outro endereço utilizando endereçamento, teremos um erro, pois deveremos utilizar o append para adionar itens a lista.
+<pre>
+>>> lista[3] = "Rizzo"
+Traceback (most recent call last):
+File "&lt;pyshell#138&gt;", line 1, in -toplevel-
+lista[3] = "Fabio"
+IndexError: list assignment index out of range
+</pre>
+<p>
+Agora utilizando o método append:
+<pre>
+>>> lista.append("Matos")
+>>> lista
+["Fabio", 2, 3, "Matos"]
+</pre>
+<p>
+Existem outros métodos de adicionar valores a listas. Veja abaixo:
+<pre>
+>>> lista
+["Fabio", 2, 3, "Matos"] 
+>>> lista.insert(1,"Rizzo")
+>>> lista
+["Fabio", "Rizzo", 2, 3, "Matos"]
+</pre>
+<p>
+Utilizando a forma acima, podemos definir em qual endereço queremos adicionar o valor desejado. No caso acima, inserimos Rizzo no endereço 1 da lista.
+<p>
+Outro método utilizado é o extend, que é utilizado para adicionarmos mais que 1 valor, ou principalmente para adicionarmos um a lista inteira a outra lista. Veja:
+<pre>
+>>> lista = ["Fabio","Rizzo","Matos"]
+>>> lista2 = ["Azul","Preto"]
+>>> lista.extend(lista2)
+>>> lista
+["Fabio", "Rizzo", "Matos", "Azul", "Preto"]
+</pre>
+<p>
+Se nós tivéssemos utilizado o método append nesse caso teriamos uma lista contendo outra lista. Veja:
+<pre>
+>>> lista = ["Fabio","Rizzo","Matos"]
+>>> lista.append(lista2)
+>>> lista
+["Fabio", "Rizzo", "Matos", ["Azul", "Preto"] ]
+</pre>
+<p>
+E quando chamasse-mos o valor 3 lista, teriamos uma lista como resposta e não somente Azul:
+<pre>
+>>> lista[3]
+["Azul", "Preto"]
+>>> len(lista)
+4
+</pre>
+<p>
+Mais com o método extend, teriamos o azul como resposta.
+<pre>
+>>> lista[3]
+"Azul"
+>>> len(lista)
+5
+</pre>
+<p>
+Veja que o len nos mostrou valores diferentes, pois com o append a lista2 é apenas um valor dentro de uma lista diferente do extend que adiciona a lista2 como vários valores.
+<p>
+Para removermos algum valor da lista temos alguns métodos. Veja:
+<pre>
+>>> lista
+["Fabio", "Rizzo", "Matos", "Azul", "Preto"]
+>>> lista.remove("Preto")
+>>> lista
+["Fabio", "Rizzo", "Matos", "Azul"]
+>>> lista.pop()
+"Azul"
+</pre>
+<p>
+Dessa forma removeremos um valor que existe em nossa lista. E o método lista.pop() por default remove o ultimo valor, porém é possível adicionar um endereço a ser removido:
+<pre>
+>>> lista
+["Fabio", "Rizzo", "Matos"]
+>>> lista.pop(1)
+"Rizzo"
+>>> lista
+["Fabio", "Matos"]
+</pre>
+<p>
+Se tentarmos remover um valor que não está na lista, teremos o seguinte retorno:
+<pre>
+>>> lista.remove("Amarelo")
+Traceback (most recent call last):
+File "&lt;pyshell#168&gt;", line 1, in -toplevel-
+lista.remove("Amarelo")
+ValueError: list.remove(x): x not in list
+</pre>
+<p>
+Para saber se tal valor existe dentro de uma seqüencia, basta fazer o seguinte:
+<pre>
+>>> "Amarelo" in lista
+False
+</pre>
+<p>
+Se o valor retornar True significa que temos o valor na lista, caso contrário teremos o valor False como acima.
+<p>
+Agora para achar o endereço do valor dentro da lista utilizamos o método index:
+<pre>
+>>> lista
+["Fabio", "Rizzo", "Matos", "Azul"]
+>>> lista.index("Azul")
+</pre>
+<p>
+Temos alguns outros métodos que também podem ser usados em listas:
+<p>
+<TABLE class=MsoNormalTable >
+    <TD     ><STRONG><FONT        face=Verdana><FONT size=2>Método</FONT></FONT></STRONG></P></TD>
+    <TD     ><STRONG><FONT        face=Verdana><FONT size=2>Para que 
+      serve</FONT></FONT></STRONG></P></TD>
+    <TD     ><STRONG><FONT        face=Verdana><FONT    size=2>Exemplo</FONT></FONT></STRONG></P></TD></TR>
+  
+  <TR>
+    <TD     ><FONT        face=Verdana><FONT size=2>lista.reverse()</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>Reverte a ordem dos valores de uma 
+      lista.</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; lista</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>[1, 2, 3]</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      lista.reverse()</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; lista</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>[3, 2, 1]</FONT></FONT></P></TD></TR>
+  <TR>
+    <TD     ><FONT        face=Verdana><FONT      size=2>lista.count(valor)</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>Conta a quantidade de vezes que determinado 
+      valor esta dentro da lista.</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      lista.count(1)</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>1</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      lista.count(4)</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>0</FONT></FONT></P></TD></TR>
+  <TR>
+    <TD     ><FONT        face=Verdana><FONT size=2>lista.sort()</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>Coloca em ordem uma lista que esteja com seus 
+      valores bagunçados.</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; lista</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>[3, 2, 1, 1, 3, 6, 9, 8, 7, 1, 25, 
+      15]</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      lista.sort()</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; lista</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>[1, 1, 1, 2, 3, 3, 6, 7, 8, 9, 15, 
+      25]</FONT></FONT></P></TD></TR>
+  <TR>
+    <TD     ><FONT        face=Verdana><FONT size=2>x in lista</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>Verifica se o valor x esta dentro de lista. 
+      Retorna True se estiver e False caso não.</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; lista</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>[1, 1, 1, 2, 3, 3, 6, 7, 8, 9, 15, 
+      25]</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 11 in 
+      lista</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>False</FONT></FONT></P></TD></TR>
+  <TR     ><TD     ><FONT        face=Verdana><FONT size=2>len(lista)</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>Conta a quantidade de valores de uma 
+      lista.</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; lista</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>[1, 1, 1, 2, 3, 3, 6, 7, 8, 9, 15, 
+      25]</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      len(lista)</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT  size=2>12</FONT></FONT></P></TD></TR></TABLE>
+<b>1.3 - Tuplas</b>
+<p>
+Tuplas são listas imutáveis, ou seja, não é possível modifica-la sem antes ter de criar uma nova. Um exemplo de tupla:
+<pre>
+>>> tupla = ("fabio","rizzo","matos")
+>>> tupla
+("fabio", "rizzo", "matos")
+</pre>
+<p>
+Tuplas são mais rápidas que listas, e se você pretende ter apenas uma sequencia de valores imutáveis, utilize tuplas ao invés de listas.
+<p>
+Tuplas não tem métodos atribuídos a ela, por isso não é possível utilizar nenhum dos métodos de listas em tuplas.
+<p>
+<b>1.4 - Dicionários</b>
+<p>
+Dicionário é um tipo de dado que permite criar uma relação entre chaves e valores. O sistema de localização dos valores fica atribuido as chaves, e é por ela que devemos procurar os valores.
+<pre>
+>>> cadastro={"Nome":"Fabio Rizzo","idade":"22"}
+>>> cadastro
+{"idade": "22", "Nome": "Fabio Rizzo"}
+</pre>
+<p>
+No exemplo acima definimos a chave nome o valor Fabio Rizzo e a chave idade o valor 22.
+<pre>
+>>> cadastro["idade"]
+"22"
+>>> cadastro["Nome"]
+"Fabio Rizzo"
+</pre>
+<p>
+Vimos acima como ver os valores da chave idade e da chave Nome. Para adicionarmos uma nova chave e um novo valor fazemos assim:
+<pre>
+>>> cadastro["Signo"]="Leão"
+>>> cadastro
+{"idade": "22", "Signo": "Le\xe3o", "Nome": "Fabio Rizzo"}
+</pre>
+<p>
+Dessa forma adicionamos uma nova chave e valor ao dicionário cadastro. E para alterarmos um valor de uma determinada chave:
+<pre>
+>>> cadastro
+{"idade": "22", "Signo": "Le\xe3o", "Nome": "Fabio Rizzo"}
+>>> cadastro["Nome"]="Fabio Rizzo Matos"
+>>> cadastro
+{"idade": "22", "Signo": "Le\xe3o", "Nome": "Fabio Rizzo Matos"}
+</pre>
+<p>
+Atento ao detalhe que os dicionários são case-sensitive, ou seja, temos que perguntar exatamente pela sua chave, senão teremos um erro. Ex:
+<pre>
+>>> cadastro["nome"]
+Traceback (most recent call last):
+File "&lt;pyshell#14&gt;", line 1, in -toplevel-
+cadastro["nome"]
+KeyError: "nome"
+</pre>
+<p>
+Tivemos esse erro porque não existe chave nome e sim Nome. 
+<p>
+Para removermos uma determinada chave devemos utilizar o método del. Veja:
+<pre>
+>>> cadastro
+{"idade": "22", "Signo": "Le\xe3o", "Nome": "Fabio Rizzo Matos"}
+>>> del cadastro["Signo"]
+>>> cadastro
+{"idade": "22", "Nome": "Fabio Rizzo Matos"}
+</pre>
+<p>
+Ou utilizar o método clear(), que elimina todas as chaves e valores de um dicionário.
+<pre>
+>>> cadastro
+{"idade": "22", "Nome": "Fabio Rizzo Matos"}
+>>> cadastro.clear()
+>>> cadastro
+{}
+</pre>
+<p>
+Existem outros métodos que podem ser usados em dicionários. Veja abaixo:
+<p>
+<TABLE class=MsoNormalTable >
+    <TD     ><STRONG><FONT        face=Verdana><FONT size=2>Método</FONT></FONT></STRONG></P></TD>
+    <TD     ><STRONG><FONT        face=Verdana><FONT size=2>Para que 
+      serve</FONT></FONT></STRONG></P></TD>
+    <TD     ><STRONG><FONT        face=Verdana><FONT    size=2>Exemplo</FONT></FONT></STRONG></P></TD></TR>
+  
+  <TR>
+    <TD     ><FONT        face=Verdana><FONT  size=2>dicionario.keys()</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>Mostra quais chave o dicionário 
+      tem.</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; dicionario={"Nome":"Fabio Rizzo 
+      Matos","idade":"22"}</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      dicionario.keys()</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>["idade", 
+  "Nome"]</FONT></FONT></P></TD></TR>
+  <TR>
+    <TD     ><FONT        face=Verdana><FONT        size=2>dicionario.has_key(chave)</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>Verifica se o dicionário tem a chave 
+      procurada.</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      dicionario</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>{"idade": "22", "Nome": "Fabio Rizzo 
+      Matos"}</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      dicionario.has_key("Cor")</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>False</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      dicionario["cor"]="Branca"</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      dicionario.has_key("cor")</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>True</FONT></FONT></P></TD></TR>
+  <TR     ><TD     ><FONT        face=Verdana><FONT      size=2>dicionario.itens()</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>Retorna uma lista de tuplas contendo chave e 
+      valor.</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      dicionario</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>{"idade": "22", "cor": "Branca", "Nome": "Fabio 
+      Rizzo Matos"}</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      dicionario.items()</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>[("idade", "22"), ("cor", "Branca"), ("Nome", 
+      "Fabio Rizzo 
+Matos")]</FONT></FONT></P></TD></TR></TABLE>
+<p>
+<b>1.5 - Formatando Strings</b>
+<p>
+É possível formatar o valor de uma string. Veja:
+<pre>
+>>> nome="Fabio"
+>>> sobrenome="Rizzo"
+>>> print "Meu Nome é: %s, e meu sobrenome é: %s" % (nome,sobrenome)
+Meu Nome é: Fabio, e meu sobrenome é: Rizzo
+</pre>
+<p>
+Podemos dizer que existe uma "formula" para se formatar strings. Podemos utilizar dessa forma:
+<pre>
+print "string %tipo" % variável
+</pre>
+<p>
+Onde string é o texto a ser visualizado, %tipo é o formato do dado (explicaremos mais adiante), e % variável, é a variável que substituíra o valor de %tipo.
+<pre>
+>>> nome = "fabio"
+>>> sobrenome = "rizzo"
+>>> print sobrenome + " é o sobrenome do " + nome
+rizzo é o sobrenome do fabio
+</pre>
+<p>
+Também podemos concatenar as strings como acima. E para formatar números utilizamos dessa forma:
+<pre>
+>>> print "O valor do sapato é: %f" % 12.57
+O valor do sapato é: 12.570000
+</pre>
+<p>
+Ou podemos melhorar essa expressão utilizando uma variável:
+<pre>
+>>> valor=12.57
+>>> print "O valor do sapato é: %f" % valor
+O valor do sapato é: 12.570000 
+</pre>
+<p>
+Este é um exemplo utilizando o operador Float (f). Nesse exemplo apareceram muitos zeros depois de 12.57, que podemos suprimir dessa forma:
+<pre>
+>>> print "O valor do sapato é: %.2f" % valor
+O valor do sapato é: 12.57
+</pre>
+<p>
+Utilizando o conceito de .x podemos determinar quantas casas decimais deve aparecer o valor, como no exemplo acima somente com duas casas decimais.
+<pre>
+%.2f
+</pre>
+<p>
+E utilizando y. Podemos determinar que o valor apareça com y caracteres.
+<pre>
+>>> print "O valor do sapato é: %10.2f" % valor
+O valor do sapato é: 12.57
+</pre>
+<p>
+Nesse caso formatamos a string para ter dez espaços de preenchimento, mais que mostre somente duas casas decimais.
+<p>
+Mais poderíamos colocar um sinal de + no final do valor indicando ser positivo assim:
+<pre>
+>>> print "O valor do sapato é: %+10.2f" % valor
+O valor do sapato é: +12.57
+</pre>
+<p>
+Tipos de Formatação:
+<p>
+<TABLE class=MsoNormalTable >
+    <TD     ><STRONG><FONT        face=Verdana><FONT size=2>Caractere(s)</FONT></FONT></STRONG></P></TD>
+    <TD     ><STRONG><FONT        face=Verdana><FONT size=2>Resultado da 
+      Formatação</FONT></FONT></STRONG></P></TD>
+    <TD     ><STRONG><FONT        face=Verdana><FONT    size=2>Exemplo</FONT></FONT></STRONG></P></TD></TR>
+  
+  <TR>
+    <TD     ><FONT        face=Verdana><FONT size=2>%s, %r</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>String</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; nome</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>"fabio"</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; print "Meu nome é %s" 
+      %nome</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>Meu nome é fabio</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; print "Meu nome é %r" 
+      %nome</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>Meu nome é 
+    "fabio"</FONT></FONT></P></TD></TR>
+  <TR>
+    <TD     ><FONT        face=Verdana><FONT size=2>%i, %d</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>Decimal Inteiro</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      idade=22</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; print "Minha idade é: %d" % 
+      idade</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>Minha idade é: 22</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; print "Minha idade é: %i" % 
+      idade</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>Minha idade é: 
+  22</FONT></FONT></P></TD></TR>
+  <TR     ><TD     ><FONT        face=Verdana><FONT size=2>%f, %F</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>Decimal Floating</FONT></FONT></P></TD>
+    <TD     ><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; 
+      valor=123.69</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; print "Custou %f o sapato de couro" 
+      % valor</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>Custou 123.690000 o sapato de 
+      couro</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>&gt;&gt;&gt; print "Custo %F o sapato de couro" 
+      % valor</FONT></FONT></P>
+      <P class=Contedodatabela><FONT        face=Verdana><FONT size=2>Custo 123.690000 o sapato de 
+      couro</FONT></FONT></P></TD></TR></TABLE>
+<p>
+<b>1.6 - Entrada de Dados</b>
+<p>
+No Python podemos fazer uma variável conter um valor digitado através de um prompt.
+<p>
+Veja:
+<pre>
+>>> nome=raw_input("Qual o seu nome: ")
+Qual o seu nome: Fabio
+>>> nome
+"Fabio"
+</pre>
+<p>
+Porém por padrão o raw_input sempre retorna uma string. Para não retornarmos uma string devemos converter. Veja como converter para inteiro (também poderia ser float ou outro)
+<pre>
+>>> idade=int(raw_input("Qual é a sua idade: "))
+Qual é a sua idade: 22
+>>> idade
+22
+>>> type(idade)
+&lt;type "int"&gt;
+</pre></i></div></span>
+    </div>
+    <div class="author-box-article">
+        <span id="ContentPlaceHolder1_lblImgColunista"></span>
+        <span id="ContentPlaceHolder1_lblAutorDescricao"><a href="http://www.linhadecodigo.com.br/colaborador.aspx?id=136"><img src="/imagens/artigos/ColunistasGrande/fabio_rizzo.jpg" border=="0" alt="Fábio Rizzo Matos" title="Fábio Rizzo Matos" /><p>Fábio Rizzo Matos - Membro ativo da Comunidade Python/Zope e Plone, para qual escreve diversos artigos. Arquiteto de Software e Desenvolvedor, trabalha atualmente na ThreePointsWeb (<a rel='nofollow' target='_blank' href="mailto:contato@threepointsweb.com">contato@threepointsweb.com</a>), empresa especializada em desenvolvimento e treinamentos Python, Zope e Plone, realizando treinamentos e consultorias em Plone. Mantenedor do site <a rel='nofollow' target='_blank' href="http://www.fabiorizzo.com" target="_blank">http://www.fabiorizzo.com</a> além de responsável pela tradução de conteúdo.   </p></a></span>
+    </div>
+    <span id="ContentPlaceHolder1_lblSocialShareArticle2"><div id="social-share-article"><span  class="st_facebook_hcount" displayText="Facebook" st_image="http://www.linhadecodigo.com.br/img/logoLc.png"></span><span  class="st_twitter_hcount" displayText="Tweet" st_image="http://www.linhadecodigo.com.br/img/logoLc.png"></span><span  class="st_linkedin_hcount" displayText="LinkedIn" st_image="http://www.linhadecodigo.com.br/img/logoLc.png"></span><span  class="st_email_hcount" displayText="Email" st_image="http://www.linhadecodigo.com.br/img/logoLc.png"></span><span  class="st_plusone_hcount" st_image="http://www.linhadecodigo.com.br/img/logoLc.png" style="margin-left:5px;" ></span><span  class="st_fblike_hcount" st_image="http://www.linhadecodigo.com.br/img/logoLc.png" style="margin-left:-5px;" ></span></div></span>
+
+    <hr class="content-spacer" />    
+    <span id="ContentPlaceHolder1_lblArtigosRelacionados"><ul class="news-courses-videos-list" style="width:auto;"><h3>Leia também</h3><li><a href="http://www.linhadecodigo.com.br/artigo/2773/pyodconverter-conversao-em-batch-de-formato-de-documentos.aspx"  rel="nofollow">PyODConverter - Conversão em batch de formato de documentos</a><span>Python</span></li><li><a href="http://www.linhadecodigo.com.br/artigo/637/plone-quais-templates-e-css-controlam-o-que-voce-ve-e-onde-eles-estao-localizados.aspx"  rel="nofollow">Plone: Quais templates e CSS controlam o que você vê e onde eles estão localizados</a><span>Python</span></li><li><a href="http://www.linhadecodigo.com.br/artigo/562/web-services-criacao-publicacao-e-clientes.aspx"  rel="nofollow">Web Services - criação, publicação e clientes</a><span>Web Services</span></li><li><a href="http://www.linhadecodigo.com.br/artigo/503/introducao-ao-pygame.aspx"  rel="nofollow">Introdução ao PyGame</a><span>Python</span></li><li><a href="http://www.linhadecodigo.com.br/artigo/388/automatizacao-de-tarefas-do-openoffice-usando-o-python.aspx"  rel="nofollow">Automatização de tarefas do OpenOffice usando o Python</a><span>Python</span></li></ul></span>
+</div>
+
+				<div class="aside">
+					
+<span style="font-size:10px; font-family:Arial, Verdana; color:#999999;">Publicidade</span><br /><div class="sidebar-ads"><span id="WUC_banner_lblBanner"><a target='_blank' href='http://www.devmedia.com.br/'><img src='http://www.linhadecodigo.com.br/banners/300x250/banner-devmedia2017.png' alt='DevMedia' /></a></span></div>
+					
+					<div class="sidebar-ads" style="border:none;"><span id="WUC_banner_sec_lblBanner_sec" style="margin-top: 25px;display: inline-block;"></span></div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+<section class="dm-limitfoot"></section>
+<footer>
+	<section class="container-fluid footer-box dm-cor1">
+		<div class="container ">
+			<div class="row-fluid">
+				<div class="span7 f-box-filho">
+					<div class="row-fluid cx2">
+						<img src="http://www.linhadecodigo.com.br/img/logolc.png" alt="Linha de Código" title="Linha de Código" width="145" height="32">
+						<nav><a href="http://www.web-03.net/linhadecodigo.asp" target="_blank">Anuncie</a>|<a href="mailto:colabore@linhadecodigo.com.br" target="_blank">Fale Conosco</a>|<a href="http://www.linhadecodigo.com.br/publique.aspx">Publique</a></nav>
+					</div>
+					<ul class="social-bar">
+						<li><a class="icon-1" href="http://www.facebook.com/linhadecodigo" target="_blank"></a></li>
+						<li><a class="icon-3" href="https://twitter.com/linhadecodigo" target="_blank"></a></li>
+						<li><a class="icon-4" href="https://plus.google.com/100240100485097203227?prsrc=3" target="_blank"></a></li>
+						<li><a class="icon-2" href="http://www.linhadecodigo.com.br/feed/"></a></li>
+					</ul>
+				</div>
+				<div class="span5 cx3">
+					<div class="fb-shell">
+						<div class="fb-like-box">
+							<div class="fb-page" data-href="https://www.facebook.com/linhadecodigo" data-width="765" data-height="184" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="false">
+								<div class="fb-xfbml-parse-ignore">
+									<blockquote cite="https://www.facebook.com/linhadecodigo">
+										<a href="https://www.facebook.com/linhadecodigo">Linha de Código</a>
+									</blockquote>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>				
+			</div>
+		</div>				
+	</section>					
+	<section class="container-fluid dm-cor2 footer-box2">
+		<div class="container ">
+			<div class="row-fluid">
+				<div class="span4 offset4" style="text-align:center">Copyright 2021 - todos os direitos reservados para
+					<a href="http://www.web-03.net/" style="font-weight:bold" target="_blank" rel="nofollow">Web03</a>
+				</div>
+			</div>
+		</div>
+	</section><!-- FIM DESSA CRIANÇA -->
+</footer><!-- FIM BLOCO FOOTER -->
+</div>
+</body>
+</html>
